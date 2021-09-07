@@ -14,6 +14,14 @@
         - containerd.io
       notify:
         - docker status
+   
+    - name: configure docker
+      copy:
+        src: daemon.json
+        dest: /etc/docker/daemon.json
+      notify:
+      - restart-docker
+
         
     - name: Add vagrant user to docker group
       user:
@@ -27,9 +35,9 @@
         update_cache: no
       vars:
         packages:
-          - kubelet 
-          - kubeadm 
-          - kubectl
+          - kubelet=1.21.2-00
+          - kubeadm=1.21.2-00
+          - kubectl=1.21.2-00
   
     - name: Configure node ip
       lineinfile:
