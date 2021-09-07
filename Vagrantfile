@@ -18,17 +18,17 @@ GB=1024
 IP_PREFIX="172.22.22" # vbox virtual bridge
 #IP_PREFIX="172.55.55" # libvirt virtual bridge
 
-NODE_RAM=1024
+NODE_RAM=12288
 DISK_SIZE=10*GB
 ADD_DISK_FLAG=false
 
 MACHINES= [
   { name: "control"   , ip: ip(101), primary: true , cpus: 1, mem: 1024      , add_disk: false },
-  { name: "servera"   , ip: ip(131), primary: false, cpus: 1, mem: NODE_RAM  , add_disk: ADD_DISK_FLAG, size: DISK_SIZE },
-  { name: "serverb"   , ip: ip(132), primary: false, cpus: 1, mem: NODE_RAM  , add_disk: ADD_DISK_FLAG, size: DISK_SIZE },
-  { name: "serverc"   , ip: ip(133), primary: false, cpus: 1, mem: NODE_RAM  , add_disk: ADD_DISK_FLAG, size: DISK_SIZE },
-  { name: "serverd"   , ip: ip(133), primary: false, cpus: 1, mem: NODE_RAM  , add_disk: ADD_DISK_FLAG, size: DISK_SIZE },
+  { name: "master"   , ip: ip(131), primary: false, cpus: 3, mem: NODE_RAM  , add_disk: ADD_DISK_FLAG, size: DISK_SIZE },
+  { name: "node1"   , ip: ip(132), primary: false, cpus: 3, mem: NODE_RAM  , add_disk: ADD_DISK_FLAG, size: DISK_SIZE },
+  { name: "node2"   , ip: ip(133), primary: false, cpus: 3, mem: NODE_RAM  , add_disk: ADD_DISK_FLAG, size: DISK_SIZE },
 ]
+
 
 ANSIBLE_VARS="ansible/inventory/vars.yml"
 
